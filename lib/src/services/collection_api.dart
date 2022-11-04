@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:get/get_connect.dart';
 import 'package:mart/src/models/department.dart';
 
@@ -9,9 +11,14 @@ class CollectionApiService extends GetConnect {
   }
 
   Future<List<Department>?> getDepartments() async {
-    final response = await get<List<Department>>('departments');
+    final response = await get<Map<String, dynamic>>('departments');
     if (response.isOk) {
-      return response.body;
+      var json = response.body;
+      final items = <Department>[];
+      for (final rawItem in json?['departments']) {
+        items.add(Department.fromJson(rawItem));
+      }
+      return items;
     }
 
     return null;

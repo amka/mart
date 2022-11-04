@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mart/src/router.dart';
+import 'package:mart/src/services/collection_api.dart';
 
-void main() {
+void main() async {
+  Get.put(CollectionApiService());
+
   runApp(const MyApp());
 }
 
