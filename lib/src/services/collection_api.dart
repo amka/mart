@@ -1,7 +1,7 @@
-import 'dart:convert';
-
 import 'package:get/get_connect.dart';
 import 'package:mart/src/models/department.dart';
+
+import '../models/art_object.dart';
 
 class CollectionApiService extends GetConnect {
   @override
@@ -19,6 +19,29 @@ class CollectionApiService extends GetConnect {
         items.add(Department.fromJson(rawItem));
       }
       return items;
+    }
+
+    return null;
+  }
+
+  Future<List<int>?> getDepartmentObjects(int departmentId) async {
+    final response = await get<Map<String, dynamic>>(
+      'objects',
+      query: {'departmentIds': departmentId.toString()},
+    );
+
+    if (response.isOk && response.body!.containsKey('objectIDs')) {
+      return List<int>.from(response.body?['objectIDs']);
+    }
+
+    return null;
+  }
+
+  Future<ArtObject?> getDepartmentObject(int objectId) async {
+    final response = await get<Map<String, dynamic>>('object/$objectId');
+
+    if (response.isOk && response.body != null) {
+      return ArtObject.fromJson(response.body!);
     }
 
     return null;
