@@ -10,6 +10,12 @@
             "type": "dart"
         },
         {
+            "name": "mart (macos)",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "macos"
+        },
+        {
             "name": "mart (profile mode)",
             "request": "launch",
             "type": "dart",

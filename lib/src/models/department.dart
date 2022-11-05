@@ -1,5 +1,10 @@
+import 'package:isar/isar.dart';
+
+part 'department.g.dart';
+
+@collection
 class Department {
-  final int id;
+  Id? id;
   final String displayName;
 
   Department({required this.id, required this.displayName});

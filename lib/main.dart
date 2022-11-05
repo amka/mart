@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:isar/isar.dart';
 import 'package:mart/src/router.dart';
 import 'package:mart/src/services/collection_api.dart';
+import 'package:mart/src/services/repository.dart';
+
+import 'src/models/department.dart';
 
 void main() async {
-  Get.put(CollectionApiService());
-
+  await initServices();
   runApp(const MyApp());
+}
+
+Future initServices() async {
+  final isar = await Isar.open([DepartmentSchema]);
+  Get.put(isar);
+  Get.put(CollectionApiService());
+  Get.put(Repository());
 }
 
 class MyApp extends StatelessWidget {
@@ -17,6 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'MArt',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
       ),

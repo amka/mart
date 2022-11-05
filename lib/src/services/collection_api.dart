@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get_connect.dart';
 import 'package:mart/src/models/department.dart';
 
@@ -11,6 +12,7 @@ class CollectionApiService extends GetConnect {
   }
 
   Future<List<Department>?> getDepartments() async {
+    debugPrint('Getting Departments');
     final response = await get<Map<String, dynamic>>('departments');
     if (response.isOk) {
       var json = response.body;

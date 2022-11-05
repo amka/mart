@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mart/src/services/repository.dart';
 
 import 'department_card.dart';
 import '../models/department.dart';
-import '../services/collection_api.dart';
 
 class DepartmetnsView extends StatefulWidget {
   const DepartmetnsView({super.key});
@@ -13,12 +13,12 @@ class DepartmetnsView extends StatefulWidget {
 }
 
 class _DepartmetnsViewState extends State<DepartmetnsView> {
-  CollectionApiService collectionApi = Get.find();
+  Repository repository = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: collectionApi.getDepartments(),
+      future: repository.getDepartments(),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (snapshot.hasData) {
           List<Department> items = snapshot.data;
